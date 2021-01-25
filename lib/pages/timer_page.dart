@@ -9,6 +9,13 @@ class TimerPage extends StatefulWidget {
 
 class _TimerPageState extends State<TimerPage> {
   @override
+  void initState() {
+    super.initState();
+
+    Provider.of<TimerProvider>(context, listen: false).initData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

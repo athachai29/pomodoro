@@ -8,6 +8,7 @@ class TimerProvider with ChangeNotifier {
   bool _isCountingDown = false;
   int _start;
   Time _timeModel;
+  var _times;
 
   TimerProvider() {
     this._timeModel = new Time();
@@ -15,6 +16,7 @@ class TimerProvider with ChangeNotifier {
   }
 
   bool get isCountingDown => this._isCountingDown;
+  bool get times => this._times;
 
   String printDuration() {
     String twoDigits(int n) => n.toString().padLeft(2, "0");
@@ -66,5 +68,29 @@ class TimerProvider with ChangeNotifier {
     super.dispose();
 
     notifyListeners();
+  }
+
+  void settingTimer(
+    int focusTime,
+    int shortBreakTime,
+    int longBreakTime,
+  ) {
+    this._timeModel.settingTimer(focusTime, shortBreakTime, longBreakTime);
+
+    notifyListeners();
+  }
+
+  initData() {
+    this._start = this._timeModel.focusTime;
+
+    // notifyListeners();
+  }
+
+  Map<String, double> getDefaultTimes() {
+    this._times = this._timeModel.getDefaultTimes();
+
+    // notifyListeners();
+
+    return this._times;
   }
 }
